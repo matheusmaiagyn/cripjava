@@ -13,7 +13,8 @@ public class Procedure
         String codmsg = "";
         String msgtocrip = msg;
         String pCodAuto = "mnbvcxzçlkjhgfdsapoiuytrewqMNBVCXZÇLKJHGFDSAPOIUYTREWQ";
-        int pQtdCrip = 1;
+        String pQtdCodCrip = "";
+        int pQtdCrip = QtCrip;
         
         if(pEncrip)
         {
@@ -22,7 +23,7 @@ public class Procedure
             
             if(pAutomatico)
             {
-                pQtdCrip = pCodAuto.charAt(QtCrip-1);
+                pQtdCodCrip += pCodAuto.charAt(QtCrip-1);
                 
             }
         }else
@@ -36,9 +37,10 @@ public class Procedure
                 {
                     if(msgtocrip.charAt(1)==pCodAuto.charAt(pDefineQtCrip))
                     {
-                        pQtdCrip = pDefineQtCrip+1;
+                        pQtdCodCrip += pDefineQtCrip+1;
                     }
                 }
+                msgtocrip = msgtocrip.substring(2);
             }
         }
         
@@ -60,11 +62,14 @@ public class Procedure
         
         if(pAutomatico)
         {
-            pFinalMsg = "+" + pCodAuto.charAt(QtCrip);
+            if(pEncrip)
+            {
+            pFinalMsg = "+" + pCodAuto.charAt(QtCrip-1);
+            }
         }
         
         pFinalMsg += msgtocrip;
 
-        return pFinalMsg.toString();
+        return pFinalMsg;
     }
 }
